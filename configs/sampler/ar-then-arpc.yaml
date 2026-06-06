@@ -1,0 +1,31 @@
+# AR-then-ARPC sampler (ARThenARPCSampler)
+# Generates num_ar_tokens tokens left-to-right (AR phase), then applies
+# AR Predictor-Corrector (ARPC) block-by-block for the rest.
+# For BlockDiT models (algo.backbone = block-dit).
+predictor: ar_then_arpc
+block_size: 64            # must match the block size used during training
+num_ar_tokens: 64         # must be a multiple of block_size
+steps: 8
+ar_commit_every_step: true
+noise_removal: ancestral    # ancestral / greedy
+steps_policy: full          # full / proportional
+use_float64: true
+use_kv_cache: true
+p_nucleus: 1.0
+temperature: 1.0
+num_sample_batches: 2
+num_sample_log: 2
+early_stopping: false
+
+arpc:
+  warmup_steps: 0
+  guide_every: 1        # run the guided (predictor+corrector) step every N steps
+  # Options for corruption_mode:
+  #  - random          -> inject noise at random positions
+  #  - divergence      -> select by divergence between AR and diffusion predictions
+  #  - diffusion_metric -> select by uncertainty of diffusion predictions only
+  #  - ar_metric       -> select by uncertainty of AR predictions only
+  corruption_mode: divergence
+  divergence_measure: kld    # kld / reverse_kld / tvd
+  diffusion_metric: entropy  # entropy / confidence / margin
+  ar_metric: nll             # nll / gap_to_top1 / entropy

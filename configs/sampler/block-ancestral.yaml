@@ -1,0 +1,14 @@
+# Block-ancestral sampler (BlockGenAncestralSampler)
+# For BlockDiT models (algo.backbone = block-dit).
+predictor: block_ancestral
+block_size: 64            # must match the block size used during training
+steps: 128
+steps_policy: full        # full / proportional
+noise_removal: ancestral  # ancestral / greedy
+use_float64: true
+use_kv_cache: true
+p_nucleus: 1.0
+temperature: 1.0
+num_sample_batches: 2
+num_sample_log: 2
+early_stopping: false

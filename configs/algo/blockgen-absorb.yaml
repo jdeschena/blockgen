@@ -1,0 +1,23 @@
+name: blockgen-absorb
+diffusion_type: absorbing
+backbone: block-dit  # 
+causal_attention: False
+parameterization: subs
+subs_masking: False
+time_conditioning: False
+T: 0  # 0 (continuous) / 1000
+loss_type: elbo  # elbo / ce / ce-noisy
+post_process_mode: log_probs  # log_probs / logits (sampling-only for logits)
+# allow using elbo / ce / ce-clean differently for each noise level
+#  Key-value format as a list example: [1,ce,2,ce,4,elbo]
+loss_type_special_cases: ""
+# Noise levels where we always feed pure noise inputs:
+  # List example: [1, 2, 4]
+pure_noise_block_sizes: ""
+adaLN: True
+
+block_weights: "1"  # distribution per block size, assumes power-of-2 only
+block_size_per_gpu: "same"  # same / random / u-stratified
+
+validation:
+  mode: 'mc1'  #  mc1 / log-sum-exp-k / jensen-k

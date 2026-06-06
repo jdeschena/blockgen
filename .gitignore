@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Editor / assistant
+.vscode/
+.idea/
+.claude/
+.claude_config/
+.claude_dir/
+
+# Local caches & run outputs
+data_cache/
+eval_runs/
+outputs/
+wandb/
+*.log
+
+# Checkpoints (released on HuggingFace, not tracked in git)
+release_ckpts/
+checkpoints/
+*.ckpt
+*.safetensors
+
+# Local eval/validation artifacts
+*.csv
