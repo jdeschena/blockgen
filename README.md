@@ -35,8 +35,6 @@ pip install -r requirements.txt
 
 `requirements.txt` intentionally does **not** pin `torch` or `numpy`. We work inside the NGC PyTorch container (`nvcr.io/nvidia/pytorch:25.02-py3`), which already ships matching CUDA / cuDNN / NCCL builds. If you are not using the container, install `torch` and `numpy` **before** running `pip install -r requirements.txt`.
 
-The entry point is `main.py`, using [Hydra](https://hydra.cc/). The available config groups are:
-
 # Data
 
 Datasets are downloaded and tokenized on first use into `data.cache_dir` (defaults to `./data_cache` in the provided scripts):
